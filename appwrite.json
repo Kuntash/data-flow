@@ -1,0 +1,18 @@
+{
+  "projectId": "6463e57130cb10943169",
+  "projectName": "hackathon",
+  "functions": [
+    {
+      "$id": "64669d0b58070232c08f",
+      "name": "createUserDocument",
+      "runtime": "node-16.0",
+      "path": "functions/createUserDocument",
+      "entrypoint": "src/index.js",
+      "ignore": ["node_modules", ".npm"],
+      "execute": [],
+      "events": ["users.*.create"],
+      "schedule": "",
+      "timeout": 15
+    }
+  ]
+}
