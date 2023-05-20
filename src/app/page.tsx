@@ -1,13 +1,16 @@
 'use client'
+import { UserAtom } from '@main/globalState/user'
 import { createAccount } from '@main/utils'
-import { useState } from 'react'
+import { useAtom } from 'jotai'
+import { useEffect, useState } from 'react'
 
 export default function Home() {
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [userState] = useAtom(UserAtom)
 
-  const handleSubmit = async () => {
+  const handleSignUp = async () => {
     const payload = {
       name,
       email,
@@ -16,6 +19,9 @@ export default function Home() {
     await createAccount(payload)
   }
 
+  useEffect(() => {
+    console.log('user state: ', userState)
+  }, [userState])
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       <input
@@ -37,7 +43,7 @@ export default function Home() {
         onChange={e => setPassword(e.target.value)}
       />
 
-      <button onClick={handleSubmit}>Create account</button>
+      <button onClick={handleSignUp}>Create account</button>
     </main>
   )
 }

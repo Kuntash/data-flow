@@ -3,3 +3,8 @@ export type CreateAccountType = {
   email: string
   password: string
 }
+
+export type LoginAccountType = {
+  email: string
+  password: string
+}
