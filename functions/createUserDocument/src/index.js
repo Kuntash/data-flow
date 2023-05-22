@@ -40,13 +40,26 @@ module.exports = async function (req, res) {
   const databases = new sdk.Databases(client)
   const { $id, $createdAt, $updatedAt, name, email } = eventData
 
-  await databases.createDocument('DataFlowDB', 'Users', $id, {
-    uid: $id,
-    createdAt: $createdAt,
-    updatedAt: $updatedAt,
-    name,
-    email,
-  })
+  await databases.createDocument(
+    'DataFlowDB',
+    'Users',
+    $id,
+    {
+      uid: $id,
+      createdAt: $createdAt,
+      updatedAt: $updatedAt,
+      name,
+      email,
+    },
+    [
+      sdk.Permission.read(sdk.Role.any()),
+      sdk.Permission.update(sdk.Role.team('admin')),
+      sdk.Permission.update(sdk.Role.team('writers')),
+      sdk.Permission.update(sdk.Role.user($id)),
+      sdk.Permission.delete(sdk.Role.user('admin')),
+      sdk.Permission.delete(sdk.Role.user($id)),
+    ],
+  )
   res.json({
     message: 'Account document successfully created',
   })
