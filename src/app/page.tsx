@@ -1,6 +1,6 @@
 'use client'
 import { UserAtom } from '@main/globalState/user'
-import { createAccount } from '@main/utils'
+import { createAccount, loginAccount } from '@main/utils'
 import { useAtom } from 'jotai'
 import { useEffect, useState } from 'react'
 
@@ -16,7 +16,16 @@ export default function Home() {
       email,
       password,
     }
+
     await createAccount(payload)
+  }
+  const handleLogin = async () => {
+    const payload = {
+      email,
+      password,
+    }
+
+    await loginAccount(payload)
   }
 
   useEffect(() => {
@@ -43,7 +52,7 @@ export default function Home() {
         onChange={e => setPassword(e.target.value)}
       />
 
-      <button onClick={handleSignUp}>Create account</button>
+      <button onClick={handleLogin}>Create account</button>
     </main>
   )
 }

@@ -1,6 +1,7 @@
-import { Inter } from 'next/font/google'
-
-const inter = Inter({ subsets: ['latin'] })
+import './globals.css'
+import { Providers } from '@main/Providers'
+import { GlobalModal } from '@main/components/organisms/GlobalModal'
+import { overpass } from '@main/utils/fonts'
 
 export const metadata = {
   title: 'Dataflow, a technical flow editor',
@@ -14,7 +15,13 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={overpass.className}>
+        <div id="modal-root"></div>
+        <Providers>
+          {children}
+          <GlobalModal />
+        </Providers>
+      </body>
     </html>
   )
 }

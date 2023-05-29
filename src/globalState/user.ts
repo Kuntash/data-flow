@@ -3,6 +3,12 @@ import { create } from 'zustand'
 
 export type UserState = {
   isLoggedIn: boolean
+  uid?: string
+  name?: string
+  email?: string
+  createdAt?: string
+  updatedAt?: string
+  projects?: string[]
 }
 
 export const UserStore = create<UserState>()(() => ({
